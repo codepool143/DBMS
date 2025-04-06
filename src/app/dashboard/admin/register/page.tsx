@@ -3,16 +3,8 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
-import { getServerSession } from "next-auth";
-import { authOptions } from "@/src/app/api/auth/[...nextauth]/route";
-import { redirect } from "next/navigation";
 
-export default async function RegisterPage() {
-  const session = await getServerSession(authOptions);
-
-  if (!session || session.user.role !== "student") {
-    redirect("/");
-  }
+export default function RegisterPage() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
