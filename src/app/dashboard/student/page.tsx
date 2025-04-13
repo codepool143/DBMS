@@ -1,17 +1,9 @@
 // In your "StudentDashboard.tsx"
-import { Book, ClipboardList, GraduationCap, User } from "lucide-react";
-import { getServerSession } from "next-auth";
-import { authOptions } from "@/src/app/api/auth/[...nextauth]/route";
-import { redirect } from "next/navigation";
+import { Book, Bell, GraduationCap, UserPlus } from "lucide-react";
+import Link from "next/link";
 
 
 export default async function StudentDashboard() {
-  const session = await getServerSession(authOptions);
-
-  
-  if (!session || session.user.role !== "student") {
-    redirect("/");
-  }
 
   return (
     <div className="flex min-h-screen bg-gray-100 text-gray-900">
@@ -22,15 +14,15 @@ export default async function StudentDashboard() {
           <div className="flex items-center gap-2 cursor-pointer hover:text-blue-700">
             <Book size={20} /> My Courses
           </div>
-          <div className="flex items-center gap-2 cursor-pointer hover:text-blue-700">
-            <ClipboardList size={20} /> Assignments
-          </div>
+          <Link href="/dashboard/student/notification" className="flex items-center gap-2 hover:text-red-600">
+            <Bell size={20} /> Notifications
+          </Link>
           <div className="flex items-center gap-2 cursor-pointer hover:text-blue-700">
             <GraduationCap size={20} /> Grades
           </div>
-          <div className="flex items-center gap-2 cursor-pointer hover:text-blue-700">
-            <User size={20} /> Profile Settings
-          </div>
+          <Link href="/dashboard/student/announcement" className="flex items-center gap-2 hover:text-red-600">
+            <UserPlus size={20} /> Announcements
+          </Link>
         </nav>
       </aside>
 

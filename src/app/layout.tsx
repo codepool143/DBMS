@@ -1,6 +1,3 @@
-'use client';
-
-import { useEffect, useState } from "react";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 
@@ -19,16 +16,11 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const [isClient, setIsClient] = useState(false);
-
-  useEffect(() => {
-    setIsClient(true); // Set to true after the component mounts on the client
-  }, []);
-
   return (
-    <html lang="en">
-      <body
-        className={`${isClient ? `${geistSans.variable} ${geistMono.variable}` : ""} antialiased`}
+    <html lang="en" className={`${geistSans.variable} ${geistMono.variable}`}>
+      <body 
+        className="antialiased"
+        suppressHydrationWarning // Add this to ignore extension-modified attributes
       >
         {children}
       </body>

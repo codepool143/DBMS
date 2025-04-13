@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { Users, BarChart4, Settings, ShieldCheck, UserPlus } from "lucide-react";
+import { Bell, UserPlus,Megaphone,FileText  } from "lucide-react";
 
 export default function AdminDashboard() {
   return (
@@ -9,21 +9,18 @@ export default function AdminDashboard() {
       <aside className="w-64 bg-white shadow-lg p-6 space-y-6">
         <div className="text-2xl font-bold text-red-600">Admin Panel</div>
         <nav className="space-y-4">
-          <Link href="/dashboard/admin/register" className="flex items-center gap-2 hover:text-red-600">
-            <UserPlus size={20} /> Register User
+        <Link href="/dashboard/admin/user_management" className="flex items-center gap-2 hover:text-red-600">
+            <UserPlus size={20} /> User Management
           </Link>
-          <div className="flex items-center gap-2 cursor-pointer hover:text-red-600">
-            <Users size={20} /> User Management
-          </div>
-          <div className="flex items-center gap-2 cursor-pointer hover:text-red-600">
-            <BarChart4 size={20} /> Reports
-          </div>
-          <div className="flex items-center gap-2 cursor-pointer hover:text-red-600">
-            <Settings size={20} /> Site Settings
-          </div>
-          <div className="flex items-center gap-2 cursor-pointer hover:text-red-600">
-            <ShieldCheck size={20} /> Permissions
-          </div>
+          <Link href="/dashboard/admin/report" className="flex items-center gap-2 hover:text-red-600">
+            <FileText  size={20} /> Reports
+          </Link>
+          <Link href="/dashboard/admin/announcement" className="flex items-center gap-2 hover:text-red-600">
+            <Megaphone size={20} /> Announcements
+          </Link>
+          <Link href="/dashboard/admin/notification" className="flex items-center gap-2 hover:text-red-600">
+            <Bell size={20} /> Notifications
+          </Link>
         </nav>
       </aside>
 

@@ -1,6 +1,6 @@
-"use client";
-
-import { BookOpenCheck, ClipboardEdit, Users, UserCog } from "lucide-react";
+'use client';
+import Link from "next/link";
+import { BookOpenCheck, Megaphone, FileText , UserCog } from "lucide-react";
 
 export default function TeacherDashboard() {
   return (
@@ -12,12 +12,12 @@ export default function TeacherDashboard() {
           <div className="flex items-center gap-2 cursor-pointer hover:text-purple-700">
             <BookOpenCheck size={20} /> Manage Courses
           </div>
-          <div className="flex items-center gap-2 cursor-pointer hover:text-purple-700">
-            <ClipboardEdit size={20} /> Assignments
-          </div>
-          <div className="flex items-center gap-2 cursor-pointer hover:text-purple-700">
-            <Users size={20} /> Student List
-          </div>
+          <Link href="/dashboard/teacher/announcement" className="flex items-center gap-2 hover:text-red-600">
+            <Megaphone size={20} /> Announcements
+          </Link>
+          <Link href="/dashboard/teacher/student" className="flex items-center gap-2 hover:text-red-600">
+            <FileText  size={20} /> Students List
+          </Link>
           <div className="flex items-center gap-2 cursor-pointer hover:text-purple-700">
             <UserCog size={20} /> Profile Settings
           </div>

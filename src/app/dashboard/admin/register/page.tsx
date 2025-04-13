@@ -1,18 +1,9 @@
 "use client";
 
-import { useState } from "react";
-import { useRouter } from "next/navigation";
+import { useState } from "react"; // Removed: useRouter
 import { motion } from "framer-motion";
-import { getServerSession } from "next-auth";
-import { authOptions } from "@/src/app/api/auth/[...nextauth]/route";
-import { redirect } from "next/navigation";
 
-export default async function RegisterPage() {
-  const session = await getServerSession(authOptions);
-
-  if (!session || session.user.role !== "student") {
-    redirect("/");
-  }
+export default function RegisterPage() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -20,7 +11,6 @@ export default async function RegisterPage() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
-  const router = useRouter();
 
   const handleRegister = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -44,8 +34,12 @@ export default async function RegisterPage() {
       setEmail("");
       setPassword("");
       setRole("student");
-    } catch (err: any) {
-      setError(err.message);
+    } catch (err) {
+      if (err instanceof Error) {
+        setError(err.message);
+      } else {
+        setError("An unknown error occurred");
+      }
     }
 
     setLoading(false);

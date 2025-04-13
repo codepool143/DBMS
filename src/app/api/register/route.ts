@@ -1,7 +1,8 @@
 "use server";
 import { NextResponse } from "next/server";
 import bcrypt from "bcryptjs";
-import { db } from "@/lib/db"; 
+import { db } from "@/lib/db";
+import { RowDataPacket } from "mysql2";
 
 export async function POST(req: Request) {
   try {
@@ -13,19 +14,17 @@ export async function POST(req: Request) {
 
     const connection = await db();
 
-    
-    const [existingUser] = await connection.execute(
+    const [existingUser] = await connection.execute<RowDataPacket[]>(
       "SELECT * FROM users WHERE email = ?",
       [email]
     );
 
-    if ((existingUser as any[]).length > 0) {
+    if (existingUser.length > 0) {
       return NextResponse.json({ message: "Email already exists" }, { status: 409 });
     }
 
     const hashedPassword = await bcrypt.hash(password, 10);
 
-    // Insert new user
     await connection.execute(
       "INSERT INTO users (name, email, password, role) VALUES (?, ?, ?, ?)",
       [name, email, hashedPassword, role]
